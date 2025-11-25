@@ -55,6 +55,8 @@ LOCATIONS = {
     "Cathedral Rock": {"coords": [34.8189, -111.7925], "type": "highlight"},
     "Chapel of Holy Cross": {"coords": [34.8322, -111.7663], "type": "highlight"},
     "Bell Rock": {"coords": [34.8016, -111.7613], "type": "highlight"},
+    "Glendale": {"coords": [33.5387, -112.1860], "type": "stop"},
+    "St. Thomas Orthodox Church": {"coords": [33.4660, -112.0310], "type": "highlight"}, # Approx near 2317 E Yale St
 }
 
 # ---------------------------------------------------------
@@ -77,6 +79,7 @@ def get_weather(lat, lon, date):
             "latitude": lat,
             "longitude": lon,
             "daily": ["temperature_2m_max", "temperature_2m_min", "weathercode"],
+            "temperature_unit": "fahrenheit", # Added Fahrenheit unit
             "timezone": "auto",
             "start_date": date_str,
             "end_date": date_str
@@ -99,7 +102,7 @@ def get_weather(lat, lon, date):
             elif code in [71, 73, 75]: condition, icon = "Snow", "❄️"
             elif code >= 95: condition, icon = "Stormy", "⚡"
             
-            return f"{icon} {condition} | H: {t_max}°C L: {t_min}°C"
+            return f"{icon} {condition} | H: {t_max}°F L: {t_min}°F"
         else:
             return "Weather unavailable (Date out of range)"
     except Exception as e:
@@ -109,7 +112,7 @@ def create_map(day_selection, show_all=False):
     """Creates a Folium map based on the selected day."""
     
     # Center map roughly between Phoenix and Vegas
-    m = folium.Map(location=[35.0, -113.5], zoom_start=7, tiles="CartoDB positron")
+    m = folium.Map(location=[34.5, -112.5], zoom_start=7, tiles="CartoDB positron")
 
     routes = []
     
@@ -133,6 +136,13 @@ def create_map(day_selection, show_all=False):
             "name": "Day 3: Sedona Exploration",
             "color": "#FF9800", # Orange
             "points": ["Flagstaff", "Sedona", "Cathedral Rock", "Chapel of Holy Cross", "Bell Rock"]
+        })
+
+    if show_all or day_selection == "Day 4":
+        routes.append({
+            "name": "Day 4: Return to Phoenix",
+            "color": "#4CAF50", # Green
+            "points": ["Sedona", "Glendale", "St. Thomas Orthodox Church", "Phoenix Airport"]
         })
 
     # Draw Lines and Markers
@@ -180,23 +190,24 @@ with st.sidebar:
     
     view_mode = st.radio(
         "View Mode",
-        ["Overview", "Day 1", "Day 2", "Day 3"]
+        ["Overview", "Day 1", "Day 2", "Day 3", "Day 4"]
     )
     
     st.markdown("---")
     st.caption("Trip Stats")
-    st.markdown("**Total Distance:** ~650 miles")
-    st.markdown("**Driving Time:** ~12 hours")
+    st.markdown("**Total Distance:** ~800 miles")
+    st.markdown("**Driving Time:** ~16 hours")
     st.markdown("**States:** AZ, NV")
 
 # Main Content
 st.title("🌵 Southwest Road Trip Planner")
-st.caption("Phoenix • Las Vegas • Grand Canyon • Sedona")
+st.caption("Phoenix • Las Vegas • Grand Canyon • Sedona • Glendale")
 
 # Dates for each day
 day_1_date = start_date
 day_2_date = start_date + timedelta(days=1)
 day_3_date = start_date + timedelta(days=2)
+day_4_date = start_date + timedelta(days=3)
 
 # Map Section
 st.markdown("### 📍 Interactive Route Map")
@@ -295,7 +306,38 @@ if view_mode in ["Overview", "Day 3"]:
             <ul>
                 <li>Visit <b>Chapel of the Holy Cross</b> (built into the red rocks).</li>
                 <li>Lunch at Tlaquepaque Arts & Shopping Village.</li>
-                <li>Depart for Phoenix (approx 2 hours South on I-17).</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+
+# Day 4
+if view_mode in ["Overview", "Day 4"]:
+    with st.expander(f"Day 4: Glendale & Departure ({day_4_date.strftime('%b %d')})", expanded=True):
+        weather = get_weather(33.5387, -112.1860, day_4_date) # Weather for Glendale
+        st.markdown(f"**Weather Forecast (Phoenix/Glendale):** `{weather}`")
+        
+        st.markdown("""
+        <div class="itinerary-card">
+            <h4>🏈 Morning: Glendale</h4>
+            <ul>
+                <li>Drive South on I-17 from Sedona to <b>Glendale</b>.</li>
+                <li>Visit Historic Downtown Glendale or Westgate Entertainment District.</li>
+            </ul>
+        </div>
+        
+        <div class="itinerary-card">
+            <h4>⛪ Afternoon: St. Thomas Orthodox Church</h4>
+            <ul>
+                <li>Head to <b>2317 E Yale St, Phoenix, AZ 85006</b>.</li>
+                <li>Visit St. Thomas Orthodox Church.</li>
+            </ul>
+        </div>
+
+        <div class="itinerary-card">
+            <h4>🛫 Late Afternoon: Departure</h4>
+            <ul>
+                <li>Short drive to <b>Phoenix Sky Harbor (PHX)</b>.</li>
+                <li>Return Rental Car & Fly Out.</li>
             </ul>
         </div>
         """, unsafe_allow_html=True)
@@ -306,7 +348,7 @@ if view_mode in ["Overview", "Day 3"]:
 st.markdown("---")
 col1, col2 = st.columns([3, 1])
 with col1:
-    st.caption("Trip Planner v1.0 | Data by OpenStreetMap & Open-Meteo")
+    st.caption("Trip Planner v1.1 | Data by OpenStreetMap & Open-Meteo")
 with col2:
     if st.button("Download Itinerary PDF"):
         st.toast("Feature coming soon!", icon="📄")
