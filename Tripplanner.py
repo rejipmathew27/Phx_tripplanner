@@ -412,6 +412,7 @@ if view_mode in ["Overview", "Day 4"]:
             """, unsafe_allow_html=True)
         with c2:
             st.image(IMAGES["Church"], caption="St. Thomas Orthodox Church", use_container_width=True)
+            st.image(IMAGES["PHX"], caption="Phoenix Sky Harbor", use_container_width=True)
 
 # ---------------------------------------------------------
 # EXPORT
@@ -423,5 +424,6 @@ with col1:
 with col2:
     if st.button("Download Itinerary PDF"):
         st.toast("Feature coming soon!", icon="📄")
+
 
 
