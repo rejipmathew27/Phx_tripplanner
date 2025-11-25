@@ -51,6 +51,8 @@ LOCATIONS = {
     "Henderson": {"coords": [36.0395, -114.9817], "type": "stop"},
     "Hoover Dam": {"coords": [36.0160, -114.7377], "type": "highlight"},
     "Bypass Bridge": {"coords": [36.0145, -114.7390], "type": "waypoint"},
+    "Arizona Scenic Overlook": {"coords": [36.0095, -114.7350], "type": "waypoint"}, # Near bridge
+    "Joshua Tree Forest": {"coords": [35.8500, -114.1500], "type": "highlight"}, # Diamond Bar Rd
     "Las Vegas Strip": {"coords": [36.1147, -115.1728], "type": "stop"},
     "Grand Canyon West": {"coords": [35.9897, -113.8214], "type": "highlight"},
     "Grand Canyon South": {"coords": [36.0544, -112.1401], "type": "highlight"},
@@ -62,16 +64,19 @@ LOCATIONS = {
     "St. Thomas Orthodox Church": {"coords": [33.4660, -112.0310], "type": "highlight"}, # Approx near 2317 E Yale St
 }
 
-# Image URLs (Sourced from reliable placeholders or specific retrieval)
+# Image URLs (Configured for GitHub hosting)
+# TODO: Replace 'your-username/your-repo' with your actual repository path
+GITHUB_BASE_URL = "https://raw.githubusercontent.com/your-username/your-repo/main/assets"
+
 IMAGES = {
-    "PHX": "http://googleusercontent.com/image_collection/image_retrieval/1307434507440038807",
-    "Hoover Dam": "http://googleusercontent.com/image_collection/image_retrieval/10933109273524479577",
-    "Vegas": "http://googleusercontent.com/image_collection/image_retrieval/1890455826204537385",
-    "GC West": "http://googleusercontent.com/image_collection/image_retrieval/3142422088344223829",
-    "GC South": "http://googleusercontent.com/image_collection/image_retrieval/15205815210411302096",
-    "Cathedral Rock": "http://googleusercontent.com/image_collection/image_retrieval/11772562771185125653",
-    "Chapel": "http://googleusercontent.com/image_collection/image_retrieval/7491474699148269035",
-    "Church": "http://googleusercontent.com/image_collection/image_retrieval/17503331828097274167"
+    "PHX": f"{GITHUB_BASE_URL}/phoenix_airport.jpg",
+    "Hoover Dam": f"{GITHUB_BASE_URL}/hoover_dam.jpg",
+    "Vegas": f"{GITHUB_BASE_URL}/las_vegas_strip.jpg",
+    "GC West": f"{GITHUB_BASE_URL}/grand_canyon_west.jpg",
+    "GC South": f"{GITHUB_BASE_URL}/grand_canyon_south.jpg",
+    "Cathedral Rock": f"{GITHUB_BASE_URL}/cathedral_rock.jpg",
+    "Chapel": f"{GITHUB_BASE_URL}/chapel_holy_cross.jpg",
+    "Church": f"{GITHUB_BASE_URL}/st_thomas_orthodox_church.jpg"
 }
 
 # ---------------------------------------------------------
@@ -143,7 +148,7 @@ def create_map(day_selection, show_all=False):
         routes.append({
             "name": "Day 2: Vegas to Flagstaff",
             "color": "#9C27B0", # Purple
-            "points": ["Las Vegas Strip", "Hoover Dam", "Grand Canyon West", "Grand Canyon South", "Flagstaff"]
+            "points": ["Las Vegas Strip", "Hoover Dam", "Bypass Bridge", "Arizona Scenic Overlook", "Joshua Tree Forest", "Grand Canyon West", "Grand Canyon South", "Flagstaff"]
         })
         
     if show_all or day_selection == "Day 3":
@@ -283,11 +288,26 @@ if view_mode in ["Overview", "Day 2"]:
         with c1:
             st.markdown("""
             <div class="itinerary-card">
-                <h4>🏜️ Morning: West Rim</h4>
+                <h4>🚗 Morning: Vegas to West Rim (The Scenic Drive)</h4>
                 <ul>
-                    <li>Depart Las Vegas early (7:00 AM).</li>
-                    <li>Drive to <b>Grand Canyon West</b> (Skywalk).</li>
-                    <li><i>Note: Hualapai tribal land.</i></li>
+                    <li><b>1. Hoover Dam & Bypass Bridge</b> (40 min from Vegas):
+                        <ul>
+                            <li>Walk across the dam or the <b>Mike O’Callaghan–Pat Tillman Memorial Bridge</b> for breathtaking views.</li>
+                            <li>Allow 30–60 mins to explore.</li>
+                        </ul>
+                    </li>
+                    <li><b>2. Arizona Welcome Center / Scenic Views</b>:
+                        <ul>
+                            <li>Just across the bridge, pull over at the <b>Arizona Scenic Overlook</b> for photos of the Colorado River.</li>
+                        </ul>
+                    </li>
+                    <li><b>3. Joshua Tree Forest Parkway</b>:
+                        <ul>
+                            <li>Diamond Bar Road takes you through a unique high-desert <b>Joshua tree forest</b>.</li>
+                            <li>Pull over safely for photos of these twisted trees.</li>
+                        </ul>
+                    </li>
+                    <li>Arrive at <b>Grand Canyon West</b> (Skywalk).</li>
                 </ul>
             </div>
             
