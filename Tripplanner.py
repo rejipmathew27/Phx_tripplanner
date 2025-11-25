@@ -35,6 +35,9 @@ st.markdown("""
         border: 1px solid #E0E0E0;
         background-color: white;
     }
+    img {
+        border-radius: 8px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -57,6 +60,18 @@ LOCATIONS = {
     "Chapel of Holy Cross": {"coords": [34.8322, -111.7663], "type": "highlight"},
     "Bell Rock": {"coords": [34.8016, -111.7613], "type": "highlight"},
     "St. Thomas Orthodox Church": {"coords": [33.4660, -112.0310], "type": "highlight"}, # Approx near 2317 E Yale St
+}
+
+# Image URLs (Sourced from reliable placeholders or specific retrieval)
+IMAGES = {
+    "PHX": "http://googleusercontent.com/image_collection/image_retrieval/1307434507440038807",
+    "Hoover Dam": "http://googleusercontent.com/image_collection/image_retrieval/10933109273524479577",
+    "Vegas": "http://googleusercontent.com/image_collection/image_retrieval/1890455826204537385",
+    "GC West": "http://googleusercontent.com/image_collection/image_retrieval/3142422088344223829",
+    "GC South": "http://googleusercontent.com/image_collection/image_retrieval/15205815210411302096",
+    "Cathedral Rock": "http://googleusercontent.com/image_collection/image_retrieval/11772562771185125653",
+    "Chapel": "http://googleusercontent.com/image_collection/image_retrieval/7491474699148269035",
+    "Church": "http://googleusercontent.com/image_collection/image_retrieval/17503331828097274167"
 }
 
 # ---------------------------------------------------------
@@ -223,35 +238,40 @@ if view_mode in ["Overview", "Day 1"]:
         weather = get_weather(36.1147, -115.1728, day_1_date) # Weather for Vegas
         st.markdown(f"**Weather Forecast (Las Vegas):** `{weather}`")
         
-        st.markdown("""
-        <div class="itinerary-card">
-            <h4>🛫 Morning: Arrival & Drive</h4>
-            <ul>
-                <li>Start at <b>Phoenix Sky Harbor (PHX)</b>.</li>
-                <li>Take Route 93 North towards Las Vegas (The Joshua Tree Highway).</li>
-            </ul>
-        </div>
-        
-        <div class="itinerary-card">
-            <h4>🚧 Mid-Day: Engineering Marvels</h4>
-            <ul>
-                <li>Stop at <b>Henderson</b> for lunch.</li>
-                <li><b>Option A:</b> Visit <b>Hoover Dam</b> directly (Security check required).</li>
-                <li><b>Option B:</b> Take the Bypass Bridge (Sunset/Mike O'Callaghan) for the view without stopping.</li>
-            </ul>
-        </div>
-        
-        <div class="itinerary-card">
-            <h4>🎰 Evening: The Strip & Trams</h4>
-            <ul>
-                <li>Arrive in <b>Las Vegas</b> and Check-in.</li>
-                <li>Start walking from <b>3745 Las Vegas Blvd S</b>.</li>
-                <li>Ride the <b>Mandalay Bay Tram</b> (Mandalay Bay - Luxor - Excalibur).</li>
-                <li>Take the <b>Aria Express Tram</b> (Park MGM - Aria - Bellagio).</li>
-                <li>Dinner and Bellagio Fountains.</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
+        c1, c2 = st.columns([2, 1])
+        with c1:
+            st.markdown("""
+            <div class="itinerary-card">
+                <h4>🛫 Morning: Arrival & Drive</h4>
+                <ul>
+                    <li>Start at <b>Phoenix Sky Harbor (PHX)</b>.</li>
+                    <li>Take Route 93 North towards Las Vegas (The Joshua Tree Highway).</li>
+                </ul>
+            </div>
+            
+            <div class="itinerary-card">
+                <h4>🚧 Mid-Day: Engineering Marvels</h4>
+                <ul>
+                    <li>Stop at <b>Henderson</b> for lunch.</li>
+                    <li><b>Option A:</b> Visit <b>Hoover Dam</b> directly.</li>
+                    <li><b>Option B:</b> Take the Bypass Bridge for the view.</li>
+                </ul>
+            </div>
+            
+            <div class="itinerary-card">
+                <h4>🎰 Evening: The Strip & Trams</h4>
+                <ul>
+                    <li>Start walking from <b>3745 Las Vegas Blvd S</b>.</li>
+                    <li>Ride the <b>Mandalay Bay Tram</b>.</li>
+                    <li>Take the <b>Aria Express Tram</b>.</li>
+                    <li>Dinner and Bellagio Fountains.</li>
+                </ul>
+            </div>
+            """, unsafe_allow_html=True)
+        with c2:
+            st.image(IMAGES["PHX"], caption="Phoenix Sky Harbor", use_container_width=True)
+            st.image(IMAGES["Hoover Dam"], caption="Hoover Dam", use_container_width=True)
+            st.image(IMAGES["Vegas"], caption="Las Vegas Strip", use_container_width=True)
 
 # Day 2
 if view_mode in ["Overview", "Day 2"]:
@@ -259,33 +279,38 @@ if view_mode in ["Overview", "Day 2"]:
         weather = get_weather(36.0544, -112.1401, day_2_date) # Weather for GC South
         st.markdown(f"**Weather Forecast (Grand Canyon):** `{weather}`")
         
-        st.markdown("""
-        <div class="itinerary-card">
-            <h4>🏜️ Morning: West Rim</h4>
-            <ul>
-                <li>Depart Las Vegas early (7:00 AM).</li>
-                <li>Drive to <b>Grand Canyon West</b> (Skywalk).</li>
-                <li><i>Note: This is Hualapai tribal land, requires separate entry fee.</i></li>
-            </ul>
-        </div>
-        
-        <div class="itinerary-card">
-            <h4>🌲 Afternoon: South Rim</h4>
-            <ul>
-                <li>Long drive East to <b>Grand Canyon South Rim</b> (National Park).</li>
-                <li>Visit Mather Point and Yavapai Geology Museum.</li>
-                <li>Sunset at Hopi Point.</li>
-            </ul>
-        </div>
-        
-        <div class="itinerary-card">
-            <h4>🛌 Evening: Flagstaff</h4>
-            <ul>
-                <li>Drive South to <b>Flagstaff, AZ</b>.</li>
-                <li>Dinner in historic downtown Flagstaff (Route 66).</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
+        c1, c2 = st.columns([2, 1])
+        with c1:
+            st.markdown("""
+            <div class="itinerary-card">
+                <h4>🏜️ Morning: West Rim</h4>
+                <ul>
+                    <li>Depart Las Vegas early (7:00 AM).</li>
+                    <li>Drive to <b>Grand Canyon West</b> (Skywalk).</li>
+                    <li><i>Note: Hualapai tribal land.</i></li>
+                </ul>
+            </div>
+            
+            <div class="itinerary-card">
+                <h4>🌲 Afternoon: South Rim</h4>
+                <ul>
+                    <li>Long drive East to <b>Grand Canyon South Rim</b>.</li>
+                    <li>Visit Mather Point and Yavapai Geology Museum.</li>
+                    <li>Sunset at Hopi Point.</li>
+                </ul>
+            </div>
+            
+            <div class="itinerary-card">
+                <h4>🛌 Evening: Flagstaff</h4>
+                <ul>
+                    <li>Drive South to <b>Flagstaff, AZ</b>.</li>
+                    <li>Dinner in historic downtown.</li>
+                </ul>
+            </div>
+            """, unsafe_allow_html=True)
+        with c2:
+            st.image(IMAGES["GC West"], caption="Skywalk at West Rim", use_container_width=True)
+            st.image(IMAGES["GC South"], caption="South Rim Views", use_container_width=True)
 
 # Day 3
 if view_mode in ["Overview", "Day 3"]:
@@ -293,32 +318,37 @@ if view_mode in ["Overview", "Day 3"]:
         weather = get_weather(34.8697, -111.7610, day_3_date) # Weather for Sedona
         st.markdown(f"**Weather Forecast (Sedona):** `{weather}`")
         
-        st.markdown("""
-        <div class="itinerary-card">
-            <h4>⛰️ Morning: The Vortexes</h4>
-            <ul>
-                <li>Drive Hwy 89A (Scenic Switchbacks) from Flagstaff to <b>Sedona</b>.</li>
-                <li>Hike or view <b>Cathedral Rock</b>.</li>
-                <li>Visit <b>Bell Rock</b>.</li>
-            </ul>
-        </div>
-        
-        <div class="itinerary-card">
-            <h4>⛪ Afternoon: Architecture & Views</h4>
-            <ul>
-                <li>Visit <b>Chapel of the Holy Cross</b> (built into the red rocks).</li>
-                <li>Lunch at Tlaquepaque Arts & Shopping Village.</li>
-            </ul>
-        </div>
-        
-        <div class="itinerary-card">
-            <h4>🏙️ Evening: Drive to Phoenix</h4>
-            <ul>
-                <li>Drive South on I-17 from Sedona to <b>Phoenix</b> (approx. 2 hours).</li>
-                <li>Check into hotel in Phoenix/Scottsdale area.</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
+        c1, c2 = st.columns([2, 1])
+        with c1:
+            st.markdown("""
+            <div class="itinerary-card">
+                <h4>⛰️ Morning: The Vortexes</h4>
+                <ul>
+                    <li>Drive Hwy 89A (Scenic Switchbacks).</li>
+                    <li>Hike or view <b>Cathedral Rock</b>.</li>
+                    <li>Visit <b>Bell Rock</b>.</li>
+                </ul>
+            </div>
+            
+            <div class="itinerary-card">
+                <h4>⛪ Afternoon: Architecture & Views</h4>
+                <ul>
+                    <li>Visit <b>Chapel of the Holy Cross</b>.</li>
+                    <li>Lunch at Tlaquepaque Arts & Shopping Village.</li>
+                </ul>
+            </div>
+            
+            <div class="itinerary-card">
+                <h4>🏙️ Evening: Drive to Phoenix</h4>
+                <ul>
+                    <li>Drive South on I-17 to <b>Phoenix</b>.</li>
+                    <li>Check into hotel.</li>
+                </ul>
+            </div>
+            """, unsafe_allow_html=True)
+        with c2:
+            st.image(IMAGES["Cathedral Rock"], caption="Cathedral Rock", use_container_width=True)
+            st.image(IMAGES["Chapel"], caption="Chapel of the Holy Cross", use_container_width=True)
 
 # Day 4
 if view_mode in ["Overview", "Day 4"]:
@@ -326,31 +356,35 @@ if view_mode in ["Overview", "Day 4"]:
         weather = get_weather(33.4484, -112.0740, day_4_date) # Weather for Phoenix
         st.markdown(f"**Weather Forecast (Phoenix):** `{weather}`")
         
-        st.markdown("""
-        <div class="itinerary-card">
-            <h4>☕ Morning: Phoenix</h4>
-            <ul>
-                <li>Wake up in Phoenix.</li>
-                <li>Breakfast in the city.</li>
-            </ul>
-        </div>
-        
-        <div class="itinerary-card">
-            <h4>⛪ Mid-Day: St. Thomas Orthodox Church</h4>
-            <ul>
-                <li>Head to <b>2317 E Yale St, Phoenix, AZ 85006</b>.</li>
-                <li>Visit St. Thomas Orthodox Church.</li>
-            </ul>
-        </div>
+        c1, c2 = st.columns([2, 1])
+        with c1:
+            st.markdown("""
+            <div class="itinerary-card">
+                <h4>☕ Morning: Phoenix</h4>
+                <ul>
+                    <li>Wake up in Phoenix.</li>
+                    <li>Breakfast in the city.</li>
+                </ul>
+            </div>
+            
+            <div class="itinerary-card">
+                <h4>⛪ Mid-Day: St. Thomas Orthodox Church</h4>
+                <ul>
+                    <li>Head to <b>2317 E Yale St, Phoenix, AZ 85006</b>.</li>
+                    <li>Visit St. Thomas Orthodox Church.</li>
+                </ul>
+            </div>
 
-        <div class="itinerary-card">
-            <h4>🛫 Afternoon: Departure</h4>
-            <ul>
-                <li>Short drive to <b>Phoenix Sky Harbor (PHX)</b>.</li>
-                <li>Return Rental Car & Fly Out.</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
+            <div class="itinerary-card">
+                <h4>🛫 Afternoon: Departure</h4>
+                <ul>
+                    <li>Short drive to <b>Phoenix Sky Harbor (PHX)</b>.</li>
+                    <li>Return Rental Car & Fly Out.</li>
+                </ul>
+            </div>
+            """, unsafe_allow_html=True)
+        with c2:
+            st.image(IMAGES["Church"], caption="St. Thomas Orthodox Church", use_container_width=True)
 
 # ---------------------------------------------------------
 # EXPORT
@@ -358,7 +392,7 @@ if view_mode in ["Overview", "Day 4"]:
 st.markdown("---")
 col1, col2 = st.columns([3, 1])
 with col1:
-    st.caption("Trip Planner v1.2 | Data by OpenStreetMap & Open-Meteo")
+    st.caption("Trip Planner v1.3 | Data by OpenStreetMap & Open-Meteo")
 with col2:
     if st.button("Download Itinerary PDF"):
         st.toast("Feature coming soon!", icon="📄")
