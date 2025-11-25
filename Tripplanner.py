@@ -284,7 +284,6 @@ if view_mode in ["Overview", "Day 1"]:
         with c2:
             st.image(IMAGES["PHX"], caption="Phoenix Sky Harbor", use_container_width=True)
             st.image(IMAGES["Hoover Dam"], caption="Hoover Dam", use_container_width=True)
-            st.image(IMAGES["Hoover Bridge"], caption="Hoover Bridge", use_container_width=True)
             st.image(IMAGES["Vegas"], caption="Las Vegas Strip", use_container_width=True)
 
 # Day 2
@@ -338,6 +337,7 @@ if view_mode in ["Overview", "Day 2"]:
             </div>
             """, unsafe_allow_html=True)
         with c2:
+            st.image(IMAGES["Hoover Bridge"], caption="Hoover Bridge", use_container_width=True)
             st.image(IMAGES["GC West"], caption="Skywalk at West Rim", use_container_width=True)
             st.image(IMAGES["GC South"], caption="South Rim Views", use_container_width=True)
 
@@ -426,6 +426,7 @@ with col1:
 with col2:
     if st.button("Download Itinerary PDF"):
         st.toast("Feature coming soon!", icon="📄")
+
 
 
 
