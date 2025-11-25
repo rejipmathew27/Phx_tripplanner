@@ -71,7 +71,7 @@ GITHUB_BASE_URL = "https://raw.githubusercontent.com/rejipmathew27/Phx_tripplann
 IMAGES = {
     "PHX": f"{GITHUB_BASE_URL}/phoenix_airport.jpg",
     "Hoover Dam": f"{GITHUB_BASE_URL}/hoover_dam.jpg",
-    "Hoover Bridge": f"{GITHUB_BASE_URL}/hooverbridge.jpg",
+    "Hoover Bridge": f"{GITHUB_BASE_URL}/hoover_bridge.jpg",
     "Vegas": f"{GITHUB_BASE_URL}/las_vegas_strip.jpg",
     "GC West": f"{GITHUB_BASE_URL}/grand_canyon_west.jpg",
     "GC South": f"{GITHUB_BASE_URL}/grand_canyon_south.jpg",
@@ -284,6 +284,7 @@ if view_mode in ["Overview", "Day 1"]:
         with c2:
             st.image(IMAGES["PHX"], caption="Phoenix Sky Harbor", use_container_width=True)
             st.image(IMAGES["Hoover Dam"], caption="Hoover Dam", use_container_width=True)
+            st.image(IMAGES["Hoover Bridge"], caption="Hoover Bridge", use_container_width=True)
             st.image(IMAGES["Vegas"], caption="Las Vegas Strip", use_container_width=True)
 
 # Day 2
@@ -425,6 +426,7 @@ with col1:
 with col2:
     if st.button("Download Itinerary PDF"):
         st.toast("Feature coming soon!", icon="📄")
+
 
 
 
