@@ -3,3 +3,4 @@ folium>=0.16.0
 streamlit-folium>=0.19.0
 requests>=2.31.0
 pandas>=2.2.0
+leafmap>=0.57.9
