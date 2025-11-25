@@ -74,6 +74,7 @@ IMAGES = {
     "Hoover Bridge": f"{GITHUB_BASE_URL}/hoover_bridge.jpg",
     "Vegas": f"{GITHUB_BASE_URL}/las_vegas_strip.jpg",
     "GC West": f"{GITHUB_BASE_URL}/grand_canyon_west.jpg",
+    "BellRock Sedona": f"{GITHUB_BASE_URL}/bell_rock_sedona.jpg",
     "GC South": f"{GITHUB_BASE_URL}/grand_canyon_south.jpg",
     "Cathedral Rock": f"{GITHUB_BASE_URL}/cathedral_rock.jpg",
     "Chapel": f"{GITHUB_BASE_URL}/chapel_holy_cross.jpg",
@@ -339,6 +340,7 @@ if view_mode in ["Overview", "Day 2"]:
         with c2:
             st.image(IMAGES["Hoover Bridge"], caption="Hoover Bridge", use_container_width=True)
             st.image(IMAGES["GC West"], caption="Skywalk at West Rim", use_container_width=True)
+            st.image(IMAGES["BellRock Sedona"], caption="Bell Rock Mount Sedona", use_container_width=True)
             st.image(IMAGES["GC South"], caption="South Rim Views", use_container_width=True)
 
 # Day 3
@@ -426,6 +428,7 @@ with col1:
 with col2:
     if st.button("Download Itinerary PDF"):
         st.toast("Feature coming soon!", icon="📄")
+
 
 
 
