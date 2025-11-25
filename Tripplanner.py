@@ -71,6 +71,7 @@ GITHUB_BASE_URL = "https://raw.githubusercontent.com/rejipmathew27/Phx_tripplann
 IMAGES = {
     "PHX": f"{GITHUB_BASE_URL}/phoenix_airport.jpg",
     "Hoover Dam": f"{GITHUB_BASE_URL}/hoover_dam.jpg",
+    "Hoover Bridge": f"{GITHUB_BASE_URL}/hooverbridge.jpg",
     "Vegas": f"{GITHUB_BASE_URL}/las_vegas_strip.jpg",
     "GC West": f"{GITHUB_BASE_URL}/grand_canyon_west.jpg",
     "GC South": f"{GITHUB_BASE_URL}/grand_canyon_south.jpg",
@@ -145,7 +146,7 @@ def create_map(day_selection, show_all=False):
         routes.append({
             "name": "Day 1: PHX to Vegas",
             "color": "#E91E63", # Pink
-            "points": ["Phoenix Airport", "Route 93", "Henderson", "Hoover Dam", "Las Vegas Strip"]
+            "points": ["Phoenix Airport", "Route 93", "Henderson", "Hoover Dam","Hoover Bridge", "Las Vegas Strip"]
         })
     
     if show_all or day_selection == "Day 2":
@@ -424,6 +425,7 @@ with col1:
 with col2:
     if st.button("Download Itinerary PDF"):
         st.toast("Feature coming soon!", icon="📄")
+
 
 
 
