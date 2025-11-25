@@ -66,7 +66,7 @@ LOCATIONS = {
 
 # Image URLs (Configured for GitHub hosting)
 # TODO: Replace 'your-username/your-repo' with your actual repository path
-GITHUB_BASE_URL = "https://raw.githubusercontent.com/rejipmathew27/Phx_tripplanne/main/images"
+GITHUB_BASE_URL = "https://raw.githubusercontent.com/rejipmathew27/Phx_tripplanner/main/images"
 
 IMAGES = {
     "PHX": f"{GITHUB_BASE_URL}/phoenix_airport.jpg",
@@ -423,4 +423,5 @@ with col1:
 with col2:
     if st.button("Download Itinerary PDF"):
         st.toast("Feature coming soon!", icon="📄")
+
 
