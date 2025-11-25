@@ -146,7 +146,7 @@ def create_map(day_selection, show_all=False):
         routes.append({
             "name": "Day 1: PHX to Vegas",
             "color": "#E91E63", # Pink
-            "points": ["Phoenix Airport", "Route 93", "Henderson", "Hoover Dam","Hoover Bridge", "Las Vegas Strip"]
+            "points": ["Phoenix Airport", "Route 93", "Henderson", "Hoover Dam", "Las Vegas Strip"]
         })
     
     if show_all or day_selection == "Day 2":
@@ -426,6 +426,7 @@ with col1:
 with col2:
     if st.button("Download Itinerary PDF"):
         st.toast("Feature coming soon!", icon="📄")
+
 
 
 
