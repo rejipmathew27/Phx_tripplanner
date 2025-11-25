@@ -1,6 +1,6 @@
 import streamlit as st
 import folium
-from streamlit_folium import st_folium
+import leafmap.foliumap as leafmap
 import requests
 from datetime import datetime, timedelta
 import pandas as pd
@@ -129,10 +129,14 @@ def get_weather(lat, lon, date):
         return "Weather service offline"
 
 def create_map(day_selection, show_all=False):
-    """Creates a Folium map based on the selected day."""
+    """Creates a Leafmap based on the selected day."""
     
+    # Initialize Leafmap (folium backend)
     # Center map roughly between Phoenix and Vegas
-    m = folium.Map(location=[34.5, -112.5], zoom_start=7, tiles="CartoDB positron")
+    m = leafmap.Map(center=[34.5, -112.5], zoom=7)
+    
+    # Add a cleaner basemap style to match previous aesthetic
+    m.add_basemap("CartoDB.Positron")
 
     routes = []
     
@@ -166,6 +170,7 @@ def create_map(day_selection, show_all=False):
         })
 
     # Draw Lines and Markers
+    # Since leafmap inherits from folium.Map, we can still use folium markers for custom styling
     for route in routes:
         line_coords = []
         for point_name in route["points"]:
@@ -181,6 +186,7 @@ def create_map(day_selection, show_all=False):
             elif loc_data["type"] == "stop": icon_color, icon_icon = "blue", "bed"
             elif loc_data["type"] == "highlight": icon_color, icon_icon = "red", "camera"
             
+            # Use Folium's marker for specific icon support, adding to leafmap object
             folium.Marker(
                 [lat, lon],
                 popup=point_name,
@@ -232,7 +238,8 @@ day_4_date = start_date + timedelta(days=3)
 # Map Section
 st.markdown("### 📍 Interactive Route Map")
 map_obj = create_map(view_mode, show_all=(view_mode == "Overview"))
-st_folium(map_obj, width=1200, height=500)
+# Use leafmap's to_streamlit method
+map_obj.to_streamlit(height=500)
 
 # Itinerary Section
 st.markdown("### 🗓️ Detailed Itinerary")
